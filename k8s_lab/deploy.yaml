@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: rb
+  name: rb
+spec:
+  replicas: 12
+  selector:
+    matchLabels:
+      app: rb
+  template:
+    metadata:
+      labels:
+        app: rb
+    spec:
+      containers:
+      - image: httpd:alpine3.19
+        name: httpd
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
